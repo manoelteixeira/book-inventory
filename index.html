@@ -4,12 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/index.css" />
-    <!-- Scripts -->
-    <script src="./scripts/script.js" defer></script>
-    <title>Document</title>
+    <script src="./scripts/main.js" defer></script>
+    <title>Booktory</title>
   </head>
   <body>
-    <h1>Hello, World!</h1>
+    <!-- Page Title -->
+    <aside class="title">
+      Booktory
+    </aside>
+    <!-- List of Books -->
+    <main class="book-list"></main>
+    <!-- Add Book Form -->
+    <aside class="add-book">
+      <form action="#" class="add-book__form" id="add-book-form">
+        <input
+          type="text"
+          class="add-book__form-input"
+          id="title"
+          placeholder="Title"
+        />
+        <input
+          type="text"
+          class="add-book__form-input"
+          id="author"
+          placeholder="Author"
+        />
+        <input
+          type="url"
+          class="add-book__form-input"
+          id="imgUrl"
+          placeholder="Image URL"
+        />
+
+        <input
+          type="text"
+          class="add-book__form-input"
+          id="price"
+          placeholder="Price"
+        />
+        <select name="status" id="status" class="add-book__form-input">
+          <option value="in-stock">In Stock</option>
+          <option value="out-of-stock">Out of Stock</option>
+        </select>
+        <input type="submit" class="add-book__form-submit" value="Add Book" />
+      </form>
+      <!-- Show wheater the book info was valid. -->
+      <div class="add-book__response"></div>
+    </aside>
   </body>
 </html>
-

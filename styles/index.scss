@@ -16,102 +16,177 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: $bg-color;
+  position: relative;
+}
 
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
   display: grid;
   grid-template-columns: auto 1fr 1fr;
   grid-template-rows: 1fr;
   align-items: center;
-}
 
-.title {
-  color: $primary-color;
-  font-size: 50px;
-  rotate: -90deg;
-  width: fit-content;
-  text-align: center;
-}
-
-.book-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-  padding-right: 5%;
-  margin-right: 10px;
-  height: 50%;
-  overflow-y: scroll;
-}
-
-.book {
-  display: grid;
-  grid-template-columns: 1fr 3fr 20px;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-
-  padding: 5% 2%;
-  border-top: 2px solid black;
-
-  &:nth-child(1) {
-    border-top: none;
+  &__title {
+    color: $primary-color;
+    font-size: 50px;
+    rotate: -90deg;
+    width: fit-content;
+    text-align: center;
   }
 
-  &__cover {
-    width: 100px;
-  }
-
-  &__details {
+  &__book-list {
     display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    padding-right: 5%;
+    margin-right: 10px;
     height: 100%;
-    // gap: 5px;
+    overflow-y: scroll;
+    mask-image: linear-gradient(transparent, black, black, black, transparent);
+  }
+
+  &__add-book {
+    border-left: 2px solid black;
+    display: grid;
     grid-template-columns: 1fr;
   }
 
-  &__details-title {
-    font-size: 25px;
-    font-weight: 600;
-    color: $primary-color;
+  &__add-book-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
   }
-  &__details-author {
+
+  &__add-book-form-input {
     font-size: 15px;
+    border: none;
+    padding-bottom: 20px;
+    background-color: $bg-color;
+    border-bottom: 2px solid $primary-color;
+    font-size: 20px;
+    ::selection {
+      border: none;
+    }
   }
 
-  &__details-status {
-    text-align: center;
-    margin-top: auto;
-    margin-bottom: 10px;
-    margin-right: auto;
-    padding: 5px 10px;
+  &__add-book-form-submit {
+    margin: auto;
+    padding: 15px 65px;
     border-radius: 20px;
+    border: none;
     color: white;
+    background-color: $primary-color;
   }
 
-  &__details-price {
-    font-size: 30px;
+  &__add-book-response {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .book {
+    display: grid;
+    grid-template-columns: 1fr 3fr 20px;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+
+    padding: 5% 2%;
+    border-top: 2px solid black;
+
+    &:nth-child(1) {
+      border-top: none;
+    }
+
+    &__cover {
+      width: 100px;
+    }
+
+    &__details {
+      display: grid;
+      height: 100%;
+      // gap: 5px;
+      grid-template-columns: 1fr;
+    }
+
+    &__details-title {
+      font-size: 25px;
+      font-weight: 600;
+      color: $primary-color;
+    }
+    &__details-author {
+      font-size: 15px;
+    }
+
+    &__details-status {
+      text-align: center;
+      margin-top: auto;
+      margin-bottom: 10px;
+      margin-right: auto;
+      padding: 5px 10px;
+      border-radius: 20px;
+      color: white;
+    }
+
+    &__details-price {
+      font-size: 30px;
+      color: $primary-color;
+      font-weight: 700;
+    }
+
+    &__controls {
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1fr;
+      gap: 50%;
+    }
+    &__controls-edit {
+      cursor: pointer;
+    }
+
+    &__controls-delete {
+      // width: 20px;
+      // bottom: 0;
+      // margin-top: auto;
+      // margin-bottom: auto;
+      cursor: pointer;
+    }
+  }
+}
+
+.edit-book {
+  width: 50%;
+  border: 5px solid $primary-color;
+  padding: 20px;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  background-color: $bg-color;
+  visibility: hidden;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 2px solid $primary-color;
+    border-radius: 5px;
+    padding: 2px 3px;
     color: $primary-color;
-    font-weight: 700;
+
+    &:hover {
+      cursor: pointer;
+      color: $bg-color;
+      background-color: $primary-color;
+    }
   }
-
-  &__delete {
-    width: 20px;
-    bottom: 0;
-    margin-top: auto;
-    margin-bottom: auto;
-    cursor: pointer;
-  }
-}
-
-.in-stock {
-  background-color: green;
-}
-
-.out-of-stock {
-  background-color: red;
-}
-
-.add-book {
-  border-left: 2px solid black;
-  display: grid;
-  grid-template-columns: 1fr;
 
   &__form {
     display: grid;
@@ -119,6 +194,7 @@ body {
     gap: 20px;
     margin-left: 20%;
     margin-right: 20%;
+    z-index: 100;
   }
 
   &__form-input {
@@ -132,7 +208,6 @@ body {
       border: none;
     }
   }
-
   &__form-submit {
     margin: auto;
     padding: 15px 65px;
@@ -141,12 +216,14 @@ body {
     color: white;
     background-color: $primary-color;
   }
+}
 
-  &__response {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 20px;
-  }
+.in-stock {
+  background-color: green;
+}
+
+.out-of-stock {
+  background-color: red;
 }
 
 .fade {

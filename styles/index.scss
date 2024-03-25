@@ -98,8 +98,13 @@ body {
     padding: 5% 2%;
     border-top: 2px solid black;
 
-    &:nth-child(1) {
+    &:first-child {
       border-top: none;
+      padding-top: 25%;
+    }
+
+    &:last-child {
+      padding-bottom: 30%;
     }
 
     &__cover {

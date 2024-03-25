@@ -83,8 +83,12 @@ body {
   padding: 5% 2%;
   border-top: 2px solid black;
 }
-.container .book:nth-child(1) {
+.container .book:first-child {
   border-top: none;
+  padding-top: 25%;
+}
+.container .book:last-child {
+  padding-bottom: 30%;
 }
 .container .book__cover {
   width: 100px;

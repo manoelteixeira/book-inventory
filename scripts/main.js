@@ -116,8 +116,10 @@ function generateBookDiv(bookObj) {
   bookDelete.src = "./images/trash.svg";
 
   bookDelete.addEventListener("click", (event) => {
-    bookDelete.parentElement.remove();
-    deleteBook(event.target.parentElement);
+    const bookDiv = event.target.parentElement.parentElement;
+    deleteBook(bookDiv);
+
+    bookDelete.parentElement.parentElement.remove();
     fadeMessage("Book Deleted successfully.", "red");
   });
 

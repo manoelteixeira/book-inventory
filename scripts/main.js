@@ -7,6 +7,8 @@ const message = document.querySelector(".container__add-book-response");
 const editBookDiv = document.querySelector(".edit-book");
 const editBookClose = document.querySelector(".edit-book__close");
 const editBookForm = document.querySelector(".edit-book__form");
+const bookInfoClose = document.querySelector(".book-info__close");
+const bookInfoDiv = document.querySelector(".book-info");
 const appData = [];
 
 /**************************/
@@ -65,6 +67,7 @@ function generateBookObject(bookFormData) {
     imgUrl,
     status,
     price,
+    timestamp: getTimestamp(),
   };
 }
 
@@ -99,6 +102,17 @@ function generateBookDiv(bookObj) {
   bookDetails.appendChild(detailsStatus);
   bookDetails.appendChild(detailsPrice);
 
+  // Setup Book Info Button
+  const bookInfo = document.createElement("img");
+  bookInfo.classList.add("book__controls-info");
+  bookInfo.src = "./images/info.svg";
+  bookInfo.addEventListener("click", (event) => {
+    const book = event.target.parentElement.parentElement;
+    const title = book.querySelector(".book__details-title").innerText;
+    const author = book.querySelector(".book__details-author").innerText;
+    showBookInfo(title, author);
+  });
+
   // Setup Edit Button
   const bookEdit = document.createElement("img");
   bookEdit.classList.add("book__controls-edit");
@@ -125,6 +139,7 @@ function generateBookDiv(bookObj) {
 
   const bookControls = document.createElement("div");
   bookControls.classList.add("book__controls");
+  bookControls.appendChild(bookInfo);
   bookControls.appendChild(bookEdit);
   bookControls.appendChild(bookDelete);
 
@@ -136,6 +151,34 @@ function generateBookDiv(bookObj) {
   newBook.appendChild(bookControls);
 
   return newBook;
+}
+
+function showBookInfo(bookTitle, bookAuthor) {
+  const bookIdx = getBookIndex(bookTitle, bookAuthor);
+  const { title, author, imgUrl, status, price, timestamp } = appData[bookIdx];
+  const divTitle = document.querySelector(".book-info__title");
+  const divImage = document.querySelector(".book-info__image");
+  const divAuthor = document.querySelector(".book-info__author");
+  const divPrice = document.querySelector(".book-info__price");
+  const divStatus = document.querySelector(".book-info__status");
+  const divTimestamp = document.querySelector(".book-info__timestamp");
+
+  divTitle.innerText = title;
+  divImage.src = imgUrl;
+  divAuthor.innerText = author;
+  divPrice.innerText = `$${price}`;
+  if (status == "in-stock") {
+    divStatus.innerText = "In Stock";
+  } else {
+    divStatus.innerText = "Out of Stock";
+  }
+  if (timestamp) {
+    divTimestamp.innerText = timestamp.timestamp;
+  } else {
+    divTimestamp.innerText = "";
+  }
+
+  bookInfoDiv.style.visibility = "visible";
 }
 
 function editBook(title, author) {
@@ -204,6 +247,34 @@ function deleteBook(bookDiv) {
   saveAppData();
 }
 
+function getTimestamp() {
+  const now = new Date();
+  // Date
+  const day = now.getDate();
+  const month = now.getMonth() + 1;
+  const year = now.getFullYear();
+  // Time
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const second = now.getSeconds();
+  // Date Time String
+  const timestamp = `${day}/${month}/${year} - ${hour}:${minute}:${second}`;
+
+  return {
+    date: {
+      day,
+      month,
+      year,
+    },
+    time: {
+      hour,
+      minute,
+      second,
+    },
+    timestamp,
+  };
+}
+
 /**************/
 /*    Main    */
 /**************/
@@ -243,4 +314,7 @@ editBookClose.addEventListener("click", () => {
   editBookDiv.style.visibility = "hidden";
 });
 
+bookInfoClose.addEventListener("click", () => {
+  bookInfoDiv.style.visibility = "hidden";
+});
 loadAppData();

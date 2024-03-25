@@ -125,6 +125,8 @@ body {
   align-items: center;
   grid-template-columns: 1fr;
   gap: 50%;
+  margin-bottom: auto;
+  cursor: pointer;
 }
 .container .book__controls-edit {
   cursor: pointer;
@@ -136,6 +138,7 @@ body {
 .edit-book {
   width: 50%;
   border: 5px solid #0d044b;
+  border-radius: 20px;
   padding: 20px;
   position: absolute;
   top: 20%;
@@ -186,6 +189,68 @@ body {
   border: none;
   color: white;
   background-color: #0d044b;
+}
+
+.book-info {
+  width: 50%;
+  border: 5px solid #0d044b;
+  border-radius: 20px;
+  padding: 20px;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  background-color: #f2eee6;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  visibility: hidden;
+}
+.book-info__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 2px solid #0d044b;
+  border-radius: 5px;
+  padding: 2px 3px;
+  color: #0d044b;
+}
+.book-info__close:hover {
+  cursor: pointer;
+  color: #f2eee6;
+  background-color: #0d044b;
+}
+.book-info p {
+  font-weight: 800;
+}
+.book-info__image {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%;
+}
+.book-info__title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 40px;
+  padding-bottom: 5%;
+}
+.book-info__author {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 5%;
+}
+.book-info__price {
+  font-weight: 800;
+  font-size: 32px;
+  margin-bottom: 1%;
+}
+.book-info__status {
+  font-weight: 800;
+  font-size: 24px;
+  margin-bottom: 5%;
+}
+.book-info__timestamp {
+  font-weight: 300;
+  font-size: 12px;
 }
 
 .in-stock {

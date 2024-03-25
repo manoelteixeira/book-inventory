@@ -4,52 +4,103 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/index.css" />
+    <script
+      src="https://kit.fontawesome.com/761ccca25e.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="./scripts/main.js" defer></script>
     <title>Booktory</title>
   </head>
   <body>
-    <!-- Page Title -->
-    <aside class="title">
-      Booktory
-    </aside>
-    <!-- List of Books -->
-    <main class="book-list"></main>
-    <!-- Add Book Form -->
-    <aside class="add-book">
-      <form action="#" class="add-book__form" id="add-book-form">
+    <div class="container">
+      <!-- Page Title -->
+      <aside class="container__title">
+        Booktory
+      </aside>
+      <!-- List of Books -->
+      <main class="container__book-list"></main>
+      <!-- Add Book Form -->
+      <aside class="container__add-book">
+        <form action="#" class="container__add-book-form" id="add-book-form">
+          <input
+            type="text"
+            class="container__add-book-form-input"
+            id="title"
+            placeholder="Title"
+          />
+          <input
+            type="text"
+            class="container__add-book-form-input"
+            id="author"
+            placeholder="Author"
+          />
+          <input
+            type="url"
+            class="container__add-book-form-input"
+            id="imgUrl"
+            placeholder="Image URL"
+          />
+
+          <input
+            type="text"
+            class="container__add-book-form-input"
+            id="price"
+            placeholder="Price"
+          />
+          <select
+            name="status"
+            id="status"
+            class="container__add-book-form-input"
+          >
+            <option value="in-stock">In Stock</option>
+            <option value="out-of-stock">Out of Stock</option>
+          </select>
+          <input
+            type="submit"
+            class="container__add-book-form-submit"
+            value="Add Book"
+          />
+        </form>
+        <!-- Show wheater the book info was valid. -->
+        <div class="container__add-book-response"></div>
+      </aside>
+    </div>
+
+    <!-- Edit Book -->
+    <div class="edit-book">
+      <span class="edit-book__close">X</span>
+      <h1 class="edit-book__title">Edit</h1>
+      <form action="#" class="edit-book__form">
         <input
           type="text"
-          class="add-book__form-input"
+          class="edit-book__form-input"
+          name="title"
           id="title"
-          placeholder="Title"
         />
         <input
           type="text"
-          class="add-book__form-input"
+          class="edit-book__form-input"
+          name="autho"
           id="author"
-          placeholder="Author"
         />
         <input
           type="url"
-          class="add-book__form-input"
+          class="edit-book__form-input"
+          name="imgUrl"
           id="imgUrl"
-          placeholder="Image URL"
         />
-
         <input
           type="text"
-          class="add-book__form-input"
+          class="edit-book__form-input"
+          name="price"
           id="price"
-          placeholder="Price"
         />
-        <select name="status" id="status" class="add-book__form-input">
+        <select class="edit-book__form-input" name="status" id="status">
           <option value="in-stock">In Stock</option>
-          <option value="out-of-stock">Out of Stock</option>
-        </select>
-        <input type="submit" class="add-book__form-submit" value="Add Book" />
+          <option value="out-of-stock">Out of Stock</option></select
+        >
+        <input type="submit" class="edit-book__form-submit" value="Edit Book" />
       </form>
-      <!-- Show wheater the book info was valid. -->
-      <div class="add-book__response"></div>
-    </aside>
+    </div>
   </body>
 </html>

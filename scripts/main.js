@@ -1,9 +1,12 @@
 /*************************/
 /*    Global Variables   */
 /*************************/
-const bookList = document.querySelector(".book-list");
+const bookList = document.querySelector(".container__book-list");
 const addBookForm = document.getElementById("add-book-form");
-const message = document.querySelector(".add-book__response");
+const message = document.querySelector(".container__add-book-response");
+const editBookDiv = document.querySelector(".edit-book");
+const editBookClose = document.querySelector(".edit-book__close");
+const editBookForm = document.querySelector(".edit-book__form");
 const appData = [];
 
 /**************************/
@@ -96,24 +99,53 @@ function generateBookDiv(bookObj) {
   bookDetails.appendChild(detailsStatus);
   bookDetails.appendChild(detailsPrice);
 
+  // Setup Edit Button
+  const bookEdit = document.createElement("img");
+  bookEdit.classList.add("book__controls-edit");
+  bookEdit.src = "./images/edit.svg";
+  bookEdit.addEventListener("click", (event) => {
+    const book = event.target.parentElement.parentElement;
+    const title = book.querySelector(".book__details-title").innerText;
+    const author = book.querySelector(".book__details-author").innerText;
+    editBook(title, author);
+  });
+
   // Setup Delete button
   const bookDelete = document.createElement("img");
-  bookDelete.classList.add("book__delete");
+  bookDelete.classList.add("book__controls-delete");
   bookDelete.src = "./images/trash.svg";
+
   bookDelete.addEventListener("click", (event) => {
     bookDelete.parentElement.remove();
     deleteBook(event.target.parentElement);
     fadeMessage("Book Deleted successfully.", "red");
   });
 
+  const bookControls = document.createElement("div");
+  bookControls.classList.add("book__controls");
+  bookControls.appendChild(bookEdit);
+  bookControls.appendChild(bookDelete);
+
   // Setup New Book
   const newBook = document.createElement("div");
   newBook.classList.add("book");
   newBook.appendChild(bookCover);
   newBook.appendChild(bookDetails);
-  newBook.appendChild(bookDelete);
+  newBook.appendChild(bookControls);
 
   return newBook;
+}
+
+function editBook(title, author) {
+  editBookDiv.style.visibility = "visible";
+  const bookIdx = getBookIndex(title, author);
+  const book = appData[bookIdx];
+  editBookForm.title.value = book.title;
+  editBookForm.author.value = book.author;
+  editBookForm.imgUrl.value =
+    book.imgUrl == "./images/image-not-found.png" ? "" : book.imgUrl;
+  editBookForm.price.value = book.price;
+  editBookForm.status.value = book.status;
 }
 
 function fadeMessage(str, color) {
@@ -187,6 +219,26 @@ addBookForm.addEventListener("submit", (event) => {
     fadeMessage("Book added successfully.", "green");
     clearAddBookForm();
   }
+});
+
+editBookForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const newBook = generateBookObject(event.target);
+  if (newBook.error) {
+    const error = newBook.error.join(", ");
+    fadeMessage(`Invalid Fields: ${error}`, "red");
+  } else {
+    const newBookDiv = generateBookDiv(newBook);
+    bookList.append(newBookDiv);
+    appData.push(newBook);
+    saveAppData();
+    fadeMessage("Book updated successfully.", "green");
+    editBookDiv.style.visibility = "hidden";
+  }
+});
+
+editBookClose.addEventListener("click", () => {
+  editBookDiv.style.visibility = "hidden";
 });
 
 loadAppData();
